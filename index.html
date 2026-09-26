@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WR112 Group Presentation #1</title>
+
+<!--
+  ============================================================
+  HOW TO EDIT THIS DECK
+  ============================================================
+  - Every slide is one <section class="slide"> ... </section> block.
+  - Add a slide:       copy any <section> block and paste it where you want it.
+  - Remove a slide:    delete its whole <section> block.
+  - Reorder slides:    move <section> blocks up or down.
+  - Slide numbers and the progress bar update automatically.
+
+  Reusable slide types (just copy the matching block):
+    .slide--title      Title slide
+    .slide--passage    Heading + large quotation     (use <blockquote class="passage">)
+    .slide--question   Small "Discussion" label + very large question
+    .slide--section    Section divider (e.g. "Speaker 2")
+    .slide--content    Heading + free-form content
+
+  Placeholders:
+    Anything wrapped in <span class="placeholder">...</span> is shown with a
+    dashed outline so it is obvious it still needs content. When you paste
+    the real text, remove the <span class="placeholder"> wrapper.
+
+  Navigation:  Right Arrow / Space / Page Down = next
+               Left Arrow / Page Up           = previous
+               Home / End                     = first / last slide
+               F                              = toggle fullscreen
+  ============================================================
+-->
+
+<style>
+  /* ---------- Design tokens (change colours / fonts here) ---------- */
+  :root {
+    --bg: #ffffff;
+    --page: #f3f3f1;          /* area around the slide */
+    --text: #1c1c1e;
+    --muted: #6b6b70;
+    --rule: #d9d9dc;
+    --accent: #2f4a6d;        /* muted academic navy */
+    --accent-2: #9a9aa0;      /* neutral grey for a second author's passage */
+    --placeholder-bg: #f7f7f5;
+    --placeholder-border: #b9b9be;
+
+    --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+
+    /* Slide is designed on a fixed 1600 x 900 (16:9) canvas and scaled to fit */
+    --slide-w: 1600px;
+    --slide-h: 900px;
+    --pad-x: 130px;
+    --pad-y: 100px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    background: var(--page);
+    color: var(--text);
+    font-family: var(--font-sans);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Stage (keeps 16:9 and scales to window) ---------- */
+  #stage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--slide-w);
+    height: var(--slide-h);
+    transform-origin: center center;
+    background: var(--bg);
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+  }
+
+  /* ---------- Base slide ---------- */
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: var(--pad-y) var(--pad-x);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+  }
+  .slide.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.35s ease, visibility 0s;
+  }
+
+  /* Shared heading used on passage / content slides */
+  .slide-heading {
+    font-family: var(--font-sans);
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    padding-bottom: 28px;
+    border-bottom: 2px solid var(--rule);
+  }
+
+  /* Small uppercase label ("Discussion", "Speaker 2", etc.) */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ---------- Title slide ---------- */
+  .slide--title {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .slide--title .eyebrow { margin-bottom: 56px; }
+  .slide--title .essay-title {
+    font-family: var(--font-serif);
+    font-size: 76px;
+    font-weight: 500;
+    line-height: 1.18;
+    max-width: 1250px;
+  }
+  .slide--title .author {
+    margin-top: 44px;
+    font-size: 36px;
+    color: var(--muted);
+  }
+  .slide--title .divider {
+    width: 80px;
+    height: 2px;
+    background: var(--rule);
+    margin: 64px auto 40px;
+  }
+  .slide--title .members {
+    font-size: 32px;
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+
+  /* ---------- Passage slide ---------- */
+  .slide--passage .passage-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  .passage {
+    font-family: var(--font-serif);
+    font-size: 46px;
+    line-height: 1.55;
+    color: var(--text);
+    padding-left: 48px;
+    border-left: 6px solid var(--accent);
+    max-width: 1300px;
+  }
+  .passage-source {
+    margin-top: 28px;
+    font-family: var(--font-sans);
+    font-size: 26px;
+    color: var(--muted);
+  }
+
+  /* Subtitle under a slide heading (e.g. source of a comparison reading) */
+  .slide-subtitle {
+    display: block;
+    margin-top: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    font-family: var(--font-sans);
+    font-size: 28px;
+    color: var(--muted);
+  }
+  /* Passage variant for a different author, so it is visually distinct from Yuan */
+  .passage--secondary {
+    font-size: 44px;
+    border-left-color: var(--accent-2);
+  }
+
+  /* ---------- Question slide ---------- */
+  .slide--question {
+    justify-content: center;
+    padding-top: 0;
+    padding-bottom: 60px; /* sits slightly above centre, leaving open space */
+  }
+  .slide--question .eyebrow { margin-bottom: 44px; }
+  .question {
+    font-family: var(--font-sans);
+    font-size: 68px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    max-width: 1300px;
+  }
+
+  /* ---------- Section divider slide ---------- */
+  .slide--section {
+    justify-content: center;
+  }
+  .slide--section .eyebrow { margin-bottom: 28px; }
+  .section-title {
+    font-size: 72px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  /* ---------- Generic content slide ---------- */
+  .slide--content .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 40px;
+    line-height: 1.5;
+  }
+  .slide--content .content ul { padding-left: 1.1em; }
+  .slide--content .content li + li { margin-top: 18px; }
+
+  /* ---------- Placeholder (remove wrapper once filled in) ---------- */
+  .placeholder {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-style: normal;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--placeholder-bg);
+    border: 3px dashed var(--placeholder-border);
+    border-radius: 10px;
+    padding: 0.35em 0.7em;
+    line-height: 1.35;
+  }
+  .passage .placeholder { font-size: 40px; }
+  .question .placeholder { font-size: 56px; font-weight: 600; }
+
+  /* ---------- Progress indicator ---------- */
+  #progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    background: var(--accent);
+    opacity: 0.35;
+    transition: width 0.35s ease;
+    z-index: 10;
+  }
+  #counter {
+    position: absolute;
+    right: 40px;
+    bottom: 26px;
+    font-size: 20px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+    z-index: 10;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide, .slide.active, #progress { transition: none; }
+  }
+</style>
+</head>
+
+<body>
+<div id="stage">
+
+  <!-- ======================================================
+       SPEAKER 1 — AYDEN
+       ====================================================== -->
+
+  <!-- Slide 1: Title -->
+  <section class="slide slide--title">
+    <p class="eyebrow">Group Discussion Leader</p>
+    <h1 class="essay-title">“Navigating Modes of Communication:<br>Experiences of Being Bilingual”</h1>
+    <p class="author">Sue Yuan</p>
+    <div class="divider"></div>
+    <p class="members">Ayden · Ian · Mufan</p>
+  </section>
+
+  <!-- Slide 2: Opening Passage -->
+  <section class="slide slide--passage">
+    <h2 class="slide-heading">Opening: Personal Narrative</h2>
+    <div class="passage-wrap">
+      <blockquote class="passage">
+        “Stop trying to tell me what to do!” As I screamed into the phone,
+        the room froze silent. I immediately felt regret the moment these
+        words left my lips. The sounds coming from the gentle rustling of
+        leaves outside my window only magnified the echoing silence from
+        my mother.
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Slide 3: Question 1 -->
+  <section class="slide slide--question">
+    <p class="eyebrow">Discussion</p>
+    <p class="question">
+      Why does Yuan begin her argumentative essay with a personal story
+      about her conflict with her mother?
+    </p>
+  </section>
+
+  <!-- Slide 4: Connection to Boroditsky (passage) -->
+  <section class="slide slide--passage">
+    <h2 class="slide-heading">
+      Connection to Boroditsky
+      <span class="slide-subtitle">Lera Boroditsky, “How Does Our Language Shape the Way We Think?”</span>
+    </h2>
+    <div class="passage-wrap">
+      <blockquote class="passage passage--secondary">
+        “Once the English speakers had learned to talk about time in these new ways, their cognitive performance began to resemble that of Greek or Mandarin speakers. This suggests that patterns in a language can indeed play a causal role in constructing how we think. In practical terms, it means that when you're learning a new language, you're not simply learning a new way of talking, you are also inadvertently learning a new way of thinking.”
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Slide 5: Connection to Boroditsky (question) -->
+  <section class="slide slide--question">
+    <p class="eyebrow">Discussion</p>
+    <p class="question">
+      What is one similarity between Yuan and Boroditsky’s ideas about language?
+    </p>
+  </section>
+
+
+  <!-- ======================================================
+       SPEAKER 2 — (to be added)
+       ====================================================== -->
+
+  <!-- Slide 6: Speaker 2 Passage -->
+  <section class="slide slide--passage">
+    <h2 class="slide-heading">Speaker 2 — Selected Passage</h2>
+    <div class="passage-wrap">
+      <blockquote class="passage">
+        <span class="placeholder">[PASTE SPEAKER 2 PASSAGE HERE]</span>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Slide 7: Speaker 2 Question -->
+  <section class="slide slide--question">
+    <p class="eyebrow">Discussion</p>
+    <p class="question">
+      <span class="placeholder">[PASTE SPEAKER 2 QUESTION HERE]</span>
+    </p>
+  </section>
+
+
+  <!-- ======================================================
+       SPEAKER 3 — (to be added)
+       ====================================================== -->
+
+  <!-- Slide 8: Speaker 3 Passage -->
+  <section class="slide slide--passage">
+    <h2 class="slide-heading">Speaker 3 — Selected Passage</h2>
+    <div class="passage-wrap">
+      <blockquote class="passage">
+        <span class="placeholder">[PASTE SPEAKER 3 PASSAGE HERE]</span>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Slide 9: Speaker 3 Question -->
+  <section class="slide slide--question">
+    <p class="eyebrow">Discussion</p>
+    <p class="question">
+      <span class="placeholder">[PASTE SPEAKER 3 QUESTION HERE]</span>
+    </p>
+  </section>
+
+
+  <!-- ======================================================
+       PREVIOUS READING CONNECTION
+       ====================================================== -->
+
+  <!-- Slide 10: Connection to a Previous Reading -->
+  <section class="slide slide--content">
+    <h2 class="slide-heading">Connection to a Previous Reading</h2>
+    <div class="content">
+      <p><span class="placeholder">[PASTE GROUP MEMBER'S PREPARED CONTENT HERE]</span></p>
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       FINAL DISCUSSION
+       ====================================================== -->
+
+  <!-- Slide 11: Final Discussion -->
+  <section class="slide slide--question">
+    <p class="eyebrow">Final Discussion</p>
+    <p class="question">
+      <span class="placeholder">[GROUP CONTENT TO BE ADDED LATER]</span>
+    </p>
+  </section>
+
+
+  <!-- Progress indicator (do not remove) -->
+  <div id="progress"></div>
+  <div id="counter"></div>
+</div>
+
+<script>
+  (function () {
+    var stage = document.getElementById('stage');
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var progress = document.getElementById('progress');
+    var counter = document.getElementById('counter');
+    var current = 0;
+
+    // Scale the fixed 1600x900 canvas to fit any window while staying 16:9.
+    function fit() {
+      var scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+      stage.style.transform = 'translate(-50%, -50%) scale(' + scale + ')';
+    }
+
+    function show(index) {
+      if (index < 0 || index >= slides.length) return;
+      slides[current].classList.remove('active');
+      current = index;
+      slides[current].classList.add('active');
+      progress.style.width = ((current + 1) / slides.length * 100) + '%';
+      counter.textContent = (current + 1) + ' / ' + slides.length;
+      history.replaceState(null, '', '#' + (current + 1)); // refresh keeps your place
+    }
+
+    document.addEventListener('keydown', function (e) {
+      switch (e.key) {
+        case 'ArrowRight': case ' ': case 'PageDown':
+          e.preventDefault(); show(current + 1); break;
+        case 'ArrowLeft': case 'PageUp':
+          e.preventDefault(); show(current - 1); break;
+        case 'Home': show(0); break;
+        case 'End': show(slides.length - 1); break;
+        case 'f': case 'F':
+          if (!document.fullscreenElement) document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+          else document.exitFullscreen && document.exitFullscreen();
+          break;
+      }
+    });
+
+    window.addEventListener('resize', fit);
+    fit();
+
+    var start = parseInt(location.hash.slice(1), 10) - 1;
+    slides[0].classList.add('active');
+    show(start >= 0 && start < slides.length ? start : 0);
+  })();
+</script>
+</body>
+</html>
