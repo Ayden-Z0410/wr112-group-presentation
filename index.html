@@ -191,6 +191,13 @@
     border-left-color: var(--accent-2);
   }
 
+  /* Longer passages (roughly 700+ characters): smaller, still projector-readable */
+  .passage--long {
+    font-size: 32px;
+    line-height: 1.45;
+    margin-top: 28px;
+  }
+
   /* ---------- Question slide ---------- */
   .slide--question {
     justify-content: center;
@@ -205,6 +212,12 @@
     line-height: 1.25;
     letter-spacing: -0.015em;
     max-width: 1300px;
+  }
+
+  /* Longer discussion questions (multi-sentence) */
+  .question--long {
+    font-size: 50px;
+    line-height: 1.3;
   }
 
   /* ---------- Section divider slide ---------- */
@@ -365,50 +378,71 @@
 
 
   <!-- ======================================================
-       SPEAKER 3 — (to be added)
+       SPEAKER 3 — MUFAN
        ====================================================== -->
 
-  <!-- Slide 8: Speaker 3 Passage -->
+  <!-- Slide 8: Mufan Passage (Yuan) -->
   <section class="slide slide--passage">
-    <h2 class="slide-heading">Speaker 3 — Selected Passage</h2>
+    <h2 class="slide-heading">Code-Switching and Identity</h2>
     <div class="passage-wrap">
-      <blockquote class="passage">
-        <span class="placeholder">[PASTE SPEAKER 3 PASSAGE HERE]</span>
+      <figure class="passage-figure">
+      <blockquote class="passage passage--long">
+        “However, from a linguistics perspective, what’s more interesting is how I
+carried out the conversation. As a bilingual fluent in both Chinese and English, I
+oftentimes find myself code-switching between two languages when speaking to my
+mother who understands some English but can’t speak it. According to Laura M.
+Ahearn, a linguistic anthropologist and professor at Rutgers University, code-switching
+refers to the shifting from one language to another in a single speech event; moreover,
+such shift is oftentimes culturally meaningful and can ‘index particular social
+relationships, meaning or hierarchies’ (Ahearn 147). To linguistic anthropologists,
+code-switching or code-mixing can be a reflection of the speakers’ moral alignments
+and changing social identities, as the contrast between one code and the other is
+oftentimes purposeful, whether it is a conscious decision or not.”
       </blockquote>
+        <figcaption class="passage-source">— Yuan, par. 4</figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- Slide 9: Speaker 3 Question -->
+  <!-- Slide 9: Mufan Question -->
   <section class="slide slide--question">
     <p class="eyebrow">Discussion</p>
-    <p class="question">
-      <span class="placeholder">[PASTE SPEAKER 3 QUESTION HERE]</span>
+    <p class="question question--long">
+      Yuan argues that code-switching can reflect a speaker’s ‘moral alignments and changing social identities.’ Do you think switching between languages can actually change how a person presents themselves, or does it simply change how they express an identity they already have? Why?
     </p>
   </section>
 
-
-  <!-- ======================================================
-       PREVIOUS READING CONNECTION
-       ====================================================== -->
-
-  <!-- Slide 10: Connection to a Previous Reading -->
-  <section class="slide slide--content">
-    <h2 class="slide-heading">Connection to a Previous Reading</h2>
-    <div class="content">
-      <p><span class="placeholder">[PASTE GROUP MEMBER'S PREPARED CONTENT HERE]</span></p>
+  <!-- Slide 10: Mufan Connection to Boroditsky (passage) -->
+  <section class="slide slide--passage">
+    <h2 class="slide-heading">
+      Connection to Boroditsky
+      <span class="slide-subtitle">Lera Boroditsky, “How Does Our Language Shape the Way We Think?”</span>
+    </h2>
+    <div class="passage-wrap">
+      <figure class="passage-figure">
+      <blockquote class="passage passage--secondary passage--long">
+        “One way to answer this question is to teach people new ways of talking
+and see if that changes the way they think. In our lab, we've taught English speakers
+different ways of talking about time. In one such study, English speakers were taught to
+use size metaphors (as in Greek) to describe duration (e.g., a movie is larger than a
+sneeze), or vertical metaphors (as in Mandarin) to describe event order. Once the
+English speakers had learned to talk about time in these new ways, their cognitive
+performance began to resemble that of Greek or Mandarin speakers. This suggests that
+patterns in a language can indeed play a causal role in constructing how we think. In
+practical terms, it means that when you're learning a new language, you're not simply
+learning a new way of talking, you are also inadvertently learning a new way of
+thinking.”
+      </blockquote>
+        <figcaption class="passage-source">— Boroditsky, par. 16</figcaption>
+      </figure>
     </div>
   </section>
 
-
-  <!-- ======================================================
-       FINAL DISCUSSION
-       ====================================================== -->
-
-  <!-- Slide 11: Final Discussion -->
+  <!-- Slide 11: Mufan Connection Question (final discussion) -->
   <section class="slide slide--question">
     <p class="eyebrow">Final Discussion</p>
-    <p class="question">
-      <span class="placeholder">[GROUP CONTENT TO BE ADDED LATER]</span>
+    <p class="question question--long">
+      Both Sue Yuan and Lera Boroditsky argue that language can influence the way people experience the world. However, Yuan focuses more on cultural identity and social behavior, while Boroditsky focuses on cognitive processes. What does this difference tell us about the relationship between language, culture, and thought?
     </p>
   </section>
 
