@@ -304,6 +304,18 @@
   .slide--content .content ul { padding-left: 1.1em; }
   .slide--content .content li + li { margin-top: 18px; }
 
+  /* Small speaker name in the top-right corner (outside the layout flow) */
+  .speaker-label {
+    position: absolute;
+    top: 22px;
+    right: 40px;
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+  }
+
   /* ---------- Placeholder (remove wrapper once filled in) ---------- */
   .placeholder {
     display: inline-block;
@@ -366,6 +378,7 @@
 
   <!-- Slide 2: Ayden — Yuan Opening + Discussion -->
   <section class="slide slide--passage slide--paired">
+    <p class="speaker-label">AYDEN</p>
     <h2 class="slide-heading">Opening: Personal Narrative</h2>
     <div class="passage-wrap">
       <figure class="passage-figure">
@@ -393,6 +406,7 @@
 
   <!-- Slide 3: Ian — Yuan Paragraph 9 + Discussion -->
   <section class="slide slide--passage slide--paired">
+    <p class="speaker-label">IAN</p>
     <h2 class="slide-heading">Language and Emotion</h2>
     <div class="passage-wrap">
       <figure class="passage-figure">
@@ -417,6 +431,7 @@
 
   <!-- Slide 4: Mufan — Code-Switching and Identity + Discussion -->
   <section class="slide slide--passage slide--paired slide--dense">
+    <p class="speaker-label">MUFAN</p>
     <h2 class="slide-heading">Code-Switching and Identity</h2>
     <div class="passage-wrap">
       <figure class="passage-figure">
@@ -446,6 +461,7 @@ oftentimes purposeful, whether it is a conscious decision or not.”
 
   <!-- Slide 5: Mufan — Connection to Boroditsky + Discussion -->
   <section class="slide slide--passage slide--paired slide--dense">
+    <p class="speaker-label">MUFAN</p>
     <h2 class="slide-heading">
       Connection to Boroditsky
       <span class="slide-subtitle">Lera Boroditsky, “How Does Our Language Shape the Way We Think?”</span>
