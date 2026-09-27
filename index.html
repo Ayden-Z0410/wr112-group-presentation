@@ -165,11 +165,14 @@
     border-left: 6px solid var(--accent);
     max-width: 1300px;
   }
+  .passage-figure { max-width: 1300px; }
+  /* Small location label under a passage, e.g. "— Yuan, para. 1" */
   .passage-source {
-    margin-top: 28px;
+    margin-top: 22px;
     font-family: var(--font-sans);
-    font-size: 26px;
+    font-size: 28px;
     color: var(--muted);
+    text-align: right;
   }
 
   /* Subtitle under a slide heading (e.g. source of a comparison reading) */
@@ -291,6 +294,7 @@
   <section class="slide slide--passage">
     <h2 class="slide-heading">Opening: Personal Narrative</h2>
     <div class="passage-wrap">
+      <figure class="passage-figure">
       <blockquote class="passage">
         “Stop trying to tell me what to do!” As I screamed into the phone,
         the room froze silent. I immediately felt regret the moment these
@@ -298,6 +302,8 @@
         leaves outside my window only magnified the echoing silence from
         my mother.
       </blockquote>
+        <figcaption class="passage-source">— Yuan, para. 1</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -317,9 +323,12 @@
       <span class="slide-subtitle">Lera Boroditsky, “How Does Our Language Shape the Way We Think?”</span>
     </h2>
     <div class="passage-wrap">
+      <figure class="passage-figure">
       <blockquote class="passage passage--secondary">
         “Once the English speakers had learned to talk about time in these new ways, their cognitive performance began to resemble that of Greek or Mandarin speakers. This suggests that patterns in a language can indeed play a causal role in constructing how we think. In practical terms, it means that when you're learning a new language, you're not simply learning a new way of talking, you are also inadvertently learning a new way of thinking.”
       </blockquote>
+        <figcaption class="passage-source">— Boroditsky, p. 5</figcaption>
+      </figure>
     </div>
   </section>
 
