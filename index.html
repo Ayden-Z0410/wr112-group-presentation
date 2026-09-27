@@ -44,6 +44,7 @@
     --rule: #d9d9dc;
     --accent: #2f4a6d;        /* muted academic navy */
     --accent-2: #9a9aa0;      /* neutral grey for a second author's passage */
+    --discussion-bg: #f1f4f8;  /* light tint behind the discussion question */
     --placeholder-bg: #f7f7f5;
     --placeholder-border: #b9b9be;
 
@@ -220,6 +221,66 @@
     line-height: 1.3;
   }
 
+  /* ---------- Paired slide: passage + its discussion question together ---------- */
+  .slide--paired {
+    padding-top: 64px;
+    padding-bottom: 72px;
+  }
+  .slide--paired .passage-wrap { min-height: 0; }
+  .slide--paired .passage--long { margin-top: 0; }
+  .discussion-box {
+    flex-shrink: 0;
+    margin-top: 24px;
+    padding: 22px 32px 26px;
+    background: var(--discussion-bg);
+    border-radius: 12px;
+  }
+  .discussion-box .eyebrow {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .discussion-box .question {
+    font-size: 40px;
+    line-height: 1.28;
+    max-width: none;
+  }
+  .discussion-box .question--long {
+    font-size: 32px;
+    line-height: 1.32;
+  }
+
+  /* Dense variant for paired slides with very long passages (~850+ characters) */
+  .slide--dense {
+    padding: 52px 100px 60px;
+  }
+  .slide--dense .slide-heading {
+    font-size: 36px;
+    padding-bottom: 16px;
+  }
+  .slide--dense .slide-subtitle {
+    display: inline;
+    margin-left: 18px;
+    font-size: 24px;
+  }
+  .slide--dense .passage-wrap { margin-top: 18px; }
+  .slide--dense .passage-figure,
+  .slide--dense .passage { max-width: none; }
+  .slide--dense .passage--long {
+    font-size: 30px;
+    line-height: 1.4;
+    padding-left: 36px;
+  }
+  .slide--dense .passage-source {
+    margin-top: 8px;
+    font-size: 24px;
+  }
+  .slide--dense .discussion-box {
+    margin-top: 16px;
+    padding: 16px 28px 20px;
+  }
+  .slide--dense .discussion-box .eyebrow { font-size: 18px; margin-bottom: 6px; }
+  .slide--dense .discussion-box .question--long { font-size: 30px; }
+
   /* ---------- Section divider slide ---------- */
   .slide--section {
     justify-content: center;
@@ -303,8 +364,8 @@
     <p class="members">Ayden · Ian · Mufan</p>
   </section>
 
-  <!-- Slide 2: Opening Passage -->
-  <section class="slide slide--passage">
+  <!-- Slide 2: Ayden — Yuan Opening + Discussion -->
+  <section class="slide slide--passage slide--paired">
     <h2 class="slide-heading">Opening: Personal Narrative</h2>
     <div class="passage-wrap">
       <figure class="passage-figure">
@@ -318,19 +379,17 @@
         <figcaption class="passage-source">— Yuan, par. 1</figcaption>
       </figure>
     </div>
+    <div class="discussion-box">
+      <p class="eyebrow">Discussion Question</p>
+      <p class="question">
+        Why does Yuan begin her argumentative essay with a personal story
+        about her conflict with her mother?
+      </p>
+    </div>
   </section>
 
-  <!-- Slide 3: Question 1 -->
-  <section class="slide slide--question">
-    <p class="eyebrow">Discussion</p>
-    <p class="question">
-      Why does Yuan begin her argumentative essay with a personal story
-      about her conflict with her mother?
-    </p>
-  </section>
-
-  <!-- Slide 4: Connection to Borak (passage) -->
-  <section class="slide slide--passage">
+  <!-- Slide 3: Ayden — Connection to Borak + Discussion -->
+  <section class="slide slide--passage slide--paired">
     <h2 class="slide-heading">
       Connection to Borak
       <span class="slide-subtitle">Lily Borak, “Edit and Delete: How Standard English Grammar Promotes Silence”</span>
@@ -343,14 +402,12 @@
         <figcaption class="passage-source">— Borak, par. 1</figcaption>
       </figure>
     </div>
-  </section>
-
-  <!-- Slide 5: Connection to Borak (question) -->
-  <section class="slide slide--question">
-    <p class="eyebrow">Discussion</p>
-    <p class="question">
-      What do Yuan and Borak have in common in the way they begin their essays?
-    </p>
+    <div class="discussion-box">
+      <p class="eyebrow">Discussion Question</p>
+      <p class="question">
+        What do Yuan and Borak have in common in the way they begin their essays?
+      </p>
+    </div>
   </section>
 
 
@@ -358,7 +415,7 @@
        SPEAKER 2 — (to be added)
        ====================================================== -->
 
-  <!-- Slide 6: Speaker 2 Passage -->
+  <!-- Slide 4: Speaker 2 Passage -->
   <section class="slide slide--passage">
     <h2 class="slide-heading">Speaker 2 — Selected Passage</h2>
     <div class="passage-wrap">
@@ -368,7 +425,7 @@
     </div>
   </section>
 
-  <!-- Slide 7: Speaker 2 Question -->
+  <!-- Slide 5: Speaker 2 Question -->
   <section class="slide slide--question">
     <p class="eyebrow">Discussion</p>
     <p class="question">
@@ -381,8 +438,8 @@
        SPEAKER 3 — MUFAN
        ====================================================== -->
 
-  <!-- Slide 8: Mufan Passage (Yuan) -->
-  <section class="slide slide--passage">
+  <!-- Slide 6: Mufan — Code-Switching and Identity + Discussion -->
+  <section class="slide slide--passage slide--paired slide--dense">
     <h2 class="slide-heading">Code-Switching and Identity</h2>
     <div class="passage-wrap">
       <figure class="passage-figure">
@@ -402,18 +459,16 @@ oftentimes purposeful, whether it is a conscious decision or not.”
         <figcaption class="passage-source">— Yuan, par. 4</figcaption>
       </figure>
     </div>
+    <div class="discussion-box">
+      <p class="eyebrow">Discussion Question</p>
+      <p class="question question--long">
+        Yuan argues that code-switching can reflect a speaker’s ‘moral alignments and changing social identities.’ Do you think switching between languages can actually change how a person presents themselves, or does it simply change how they express an identity they already have? Why?
+      </p>
+    </div>
   </section>
 
-  <!-- Slide 9: Mufan Question -->
-  <section class="slide slide--question">
-    <p class="eyebrow">Discussion</p>
-    <p class="question question--long">
-      Yuan argues that code-switching can reflect a speaker’s ‘moral alignments and changing social identities.’ Do you think switching between languages can actually change how a person presents themselves, or does it simply change how they express an identity they already have? Why?
-    </p>
-  </section>
-
-  <!-- Slide 10: Mufan Connection to Boroditsky (passage) -->
-  <section class="slide slide--passage">
+  <!-- Slide 7: Mufan — Connection to Boroditsky + Discussion -->
+  <section class="slide slide--passage slide--paired slide--dense">
     <h2 class="slide-heading">
       Connection to Boroditsky
       <span class="slide-subtitle">Lera Boroditsky, “How Does Our Language Shape the Way We Think?”</span>
@@ -436,14 +491,12 @@ thinking.”
         <figcaption class="passage-source">— Boroditsky, par. 16</figcaption>
       </figure>
     </div>
-  </section>
-
-  <!-- Slide 11: Mufan Connection Question (final discussion) -->
-  <section class="slide slide--question">
-    <p class="eyebrow">Final Discussion</p>
-    <p class="question question--long">
-      Both Sue Yuan and Lera Boroditsky argue that language can influence the way people experience the world. However, Yuan focuses more on cultural identity and social behavior, while Boroditsky focuses on cognitive processes. What does this difference tell us about the relationship between language, culture, and thought?
-    </p>
+    <div class="discussion-box">
+      <p class="eyebrow">Discussion Question</p>
+      <p class="question question--long">
+        Both Sue Yuan and Lera Boroditsky argue that language can influence the way people experience the world. However, Yuan focuses more on cultural identity and social behavior, while Boroditsky focuses on cognitive processes. What does this difference tell us about the relationship between language, culture, and thought?
+      </p>
+    </div>
   </section>
 
 
